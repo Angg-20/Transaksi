@@ -1,23 +1,53 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package From;
 
-/**
- *
- * @author Client
- */
-public class Menu extends javax.swing.JInternalFrame {
+import Koneksi.Database;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-    /**
-     * Creates new form Menu
-     */
+public class Menu extends javax.swing.JInternalFrame {
+    
+        private void AmbilData() {
+        try (Connection DB = Database.KoneksiDB()) {
+            PreparedStatement Query = DB.prepareStatement("SELECT * FROM pelanggan");
+            ResultSet Hasil = Query.executeQuery();
+            LP.clear();
+            while (Hasil.next()) {
+                LP.add(new Lpelanggan(
+                        Hasil.getString("id_pelanggan"),
+                        Hasil.getString("nama_pelanggan"),
+                        Hasil.getString("alamat"),
+                        Hasil.getString("telepon")
+                ));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    private void TampilkanData() {
+        DefaultTableModel TB = (DefaultTableModel) Tabel.getModel();
+        TB.setRowCount(0);
+        
+        for (Lpelanggan Pelanggan : LP) {
+            Object[] isi = new Object[4];
+            isi[0] = Pelanggan.getId_pelanggan();
+            isi[1] = Pelanggan.getNama_pelanggan();
+            isi[2] = Pelanggan.getAlamat();
+            isi[3] = Pelanggan.getTelepon();
+            TB.addRow(isi);
+        }
+        
+        Tabel.setModel(TB);
+    }
     public Menu() {
         initComponents();
     }
 
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
