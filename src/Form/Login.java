@@ -1,4 +1,4 @@
-package From;
+package Form;
 
 import Koneksi.Database;
 import java.sql.Connection;
@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-
+    
     public Login() {
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -96,7 +96,7 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginMouseClicked
         String username = Tusername.getText();
-        String password = new String (Tpassword.getPassword());
+        String password = new String(Tpassword.getPassword());
         if (username.isEmpty()) {
             Lerror.setText("Username harus di isi");
         } else if (password.isEmpty()) {
@@ -112,20 +112,20 @@ public class Login extends javax.swing.JFrame {
                 if (hasil.next()) {
                     String role = hasil.getString("role");
                     if ("administrator".equalsIgnoreCase(role)) {
-                        Lerror.setText("Administrator Berhasil Masuk");
-//                        setVisible(false);
+                        new DashBoardUtama().setVisible(true);
+                        setVisible(false);
                     } else if ("waiter".equalsIgnoreCase(role)) {
-                        Lerror.setText("Waiter Berhasil Masuk");
-//                        setVisible(false);
+                        new DashBoardUtama().setVisible(true);
+                        setVisible(false);
                     } else if ("kasir".equalsIgnoreCase(role)) {
-                        Lerror.setText("Kasir Berhasil Masuk");
-//                        setVisible(false);
+                        new DashBoardUtama().setVisible(true);
+                        setVisible(false);
                     } else if ("owner".equalsIgnoreCase(role)) {
-                        Lerror.setText("Owner Berhasil Masuk");
-//                        setVisible(false);
+                        new DashBoardUtama().setVisible(true);
+                        setVisible(false);
                     }
                 } else {
-                     Lerror.setText("username / password Salah");
+                    Lerror.setText("username / password Salah");
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
@@ -136,9 +136,9 @@ public class Login extends javax.swing.JFrame {
 
     private void TpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TpasswordActionPerformed
     }//GEN-LAST:event_TpasswordActionPerformed
-
+    
     public static void main(String args[]) {
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);

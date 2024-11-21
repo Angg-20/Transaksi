@@ -1,4 +1,4 @@
-package From;
+package Form;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
