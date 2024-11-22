@@ -7,7 +7,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     Menu Menu = null;
     Pelanggan Pelanggan = null;
-    EntriMeja EntriMeja = null;
+    Laporan Laporan = null;
 
     public Dashboard() {
         initComponents();
@@ -140,7 +140,17 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(153, 153, 153));
 
-        BModifikasi.setText("Modifikasi");
+        BModifikasi.setText("Laporan");
+        BModifikasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BModifikasiMouseClicked(evt);
+            }
+        });
+        BModifikasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BModifikasiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -161,10 +171,15 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(153, 153, 153));
 
-        jButton3.setText("Pelaporan");
+        jButton3.setText("Pelanggan");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -236,11 +251,11 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 378, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -280,18 +295,7 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_BMenuMouseClicked
 
     private void BModifikasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BModifikasiMouseClicked
-        TutupPanel();
-        if (EntriMeja == null) {
-            EntriMeja = new EntriMeja();
-            panel.add(EntriMeja);
-        }
 
-        EntriMeja.setVisible(true);
-        try {
-            EntriMeja.setMaximum(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Salah");
-        }
     }//GEN-LAST:event_BModifikasiMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -308,6 +312,24 @@ public class Dashboard extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Salah");
         }
     }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void BModifikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BModifikasiActionPerformed
+        TutupPanel();
+        if (Laporan == null) {
+            Laporan = new Laporan();
+            panel.add(Laporan);
+        }
+
+        Laporan.setVisible(true);
+        try {
+            Laporan.setMaximum(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Salah");
+        }
+    }//GEN-LAST:event_BModifikasiActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
