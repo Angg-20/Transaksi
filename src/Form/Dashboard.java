@@ -3,10 +3,13 @@ package Form;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
-public class DashBoardUtama extends javax.swing.JFrame {
+public class Dashboard extends javax.swing.JFrame {
+
     Menu Menu = null;
-    
-    public DashBoardUtama() {
+    Pelanggan Pelanggan = null;
+    EntriMeja EntriMeja = null;
+
+    public Dashboard() {
         initComponents();
     }
 
@@ -159,6 +162,11 @@ public class DashBoardUtama extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(153, 153, 153));
 
         jButton3.setText("Pelaporan");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -271,10 +279,40 @@ public class DashBoardUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BMenuMouseClicked
 
+    private void BModifikasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BModifikasiMouseClicked
+        TutupPanel();
+        if (EntriMeja == null) {
+            EntriMeja = new EntriMeja();
+            panel.add(EntriMeja);
+        }
+
+        EntriMeja.setVisible(true);
+        try {
+            EntriMeja.setMaximum(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Salah");
+        }
+    }//GEN-LAST:event_BModifikasiMouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        TutupPanel();
+        if (Pelanggan == null) {
+            Pelanggan = new Pelanggan();
+            panel.add(Pelanggan);
+        }
+
+        Pelanggan.setVisible(true);
+        try {
+            Pelanggan.setMaximum(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Salah");
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DashBoardUtama().setVisible(true);
+                new Dashboard().setVisible(true);
             }
         });
     }

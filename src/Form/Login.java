@@ -112,16 +112,16 @@ public class Login extends javax.swing.JFrame {
                 if (hasil.next()) {
                     String role = hasil.getString("role");
                     if ("administrator".equalsIgnoreCase(role)) {
-                        new DashBoardUtama().setVisible(true);
+                        new Dashboard().setVisible(true);
                         setVisible(false);
                     } else if ("waiter".equalsIgnoreCase(role)) {
-                        new DashBoardUtama().setVisible(true);
+                        new Dashboard().setVisible(true);
                         setVisible(false);
                     } else if ("kasir".equalsIgnoreCase(role)) {
-                        new DashBoardUtama().setVisible(true);
+                        new Dashboard().setVisible(true);
                         setVisible(false);
                     } else if ("owner".equalsIgnoreCase(role)) {
-                        new DashBoardUtama().setVisible(true);
+                        new Dashboard().setVisible(true);
                         setVisible(false);
                     }
                 } else {

@@ -53,6 +53,25 @@ public class Menu extends javax.swing.JInternalFrame {
         Table.setModel(TB);
     }
 
+    public void KMenuOtomatis(){
+        try (Connection DB = Database.KoneksiDB()) {
+            String query = "SELECT MAX(CAST(SUBSTRING(id_menu, 3) AS UNSIGNED)) AS max_id FROM menu";
+            PreparedStatement stmt = DB.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+
+            int maxId = 0;
+            if (rs.next()) {
+                maxId = rs.getInt("max_id");
+            }
+
+            String Id = String.format("M-%03d", maxId + 1);
+            Tid.setText(Id);
+            Tid.setEnabled(false);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,8 +135,18 @@ public class Menu extends javax.swing.JInternalFrame {
         });
 
         Bhapus.setText("Hapus");
+        Bhapus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BhapusMouseClicked(evt);
+            }
+        });
 
         Bedit.setText("Edit");
+        Bedit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BeditMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,9 +191,9 @@ public class Menu extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Bbatal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Bsimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addComponent(Bedit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addComponent(Bhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(321, 321, 321))
         );
@@ -183,6 +212,11 @@ public class Menu extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(Table);
@@ -253,6 +287,67 @@ public class Menu extends javax.swing.JInternalFrame {
         Tharga.setText("");
     }//GEN-LAST:event_BbatalMouseClicked
 
+    private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
+        int sr = Table.getSelectedRow();
+        String NS = Table.getValueAt(sr, 0).toString();
+        for (Mmenu m : LMenu) {
+            if (m.getId_menu() == Integer.parseInt(NS)) {
+                Tid.setText(String.valueOf(m.getId_menu()));
+                Tmenu.setText(m.getNama_menu());
+                Tharga.setText(String.valueOf(m.getHarga()));
+            }
+        }
+    }//GEN-LAST:event_TableMouseClicked
+
+    private void BeditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BeditMouseClicked
+        String Kmenu = Tid.getText();
+        String Nmenu = Tmenu.getText();
+        String Harga = Tharga.getText();
+
+        Connection db = Database.KoneksiDB();
+        String Query = "UPDATE menu SET nama_menu=?, harga=? WHERE id_menu=?";
+        try {
+            PreparedStatement PS = db.prepareStatement(Query);
+            PS.setString(1, Nmenu);
+            PS.setString(2, Harga);
+            PS.setString(3, Kmenu);
+            PS.executeUpdate();
+            AmbilData();
+            TampilkanData();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        Tid.setText("");
+        Tmenu.setText("");
+        Tharga.setText("");
+    }//GEN-LAST:event_BeditMouseClicked
+
+    private void BhapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BhapusMouseClicked
+        Connection con = Database.KoneksiDB();
+        String query = "DELETE FROM menu WHERE id_menu = ?";
+        try {
+            PreparedStatement pst = con.prepareStatement(query);
+            int selectedRow = Table.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(null, "Pilih data yang akan dihapus");
+                return;
+            }
+            String NS = Table.getValueAt(selectedRow, 0).toString();
+            pst.setString(1, NS);
+            pst.execute();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Berhasil Delete Data Pada Tabel");
+            AmbilData();
+            TampilkanData();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        Tid.setText("");
+        Tmenu.setText("");
+        Tharga.setText("");
+    }//GEN-LAST:event_BhapusMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bbatal;

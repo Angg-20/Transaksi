@@ -108,9 +108,9 @@
                       <Component id="Bbatal" max="32767" attributes="0"/>
                       <Component id="Bsimpan" min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="Bedit" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Component id="Bhapus" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="321" max="-2" attributes="0"/>
               </Group>
@@ -168,11 +168,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Hapus"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BhapusMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Bedit">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BeditMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -215,6 +221,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TableMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
