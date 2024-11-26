@@ -293,8 +293,8 @@ public class Pelanggan extends javax.swing.JInternalFrame {
             PS.setString(1, id);
             PS.setString(2, nama);
             PS.setString(3, jk);
-            PS.setString(4, alamat);
-            PS.setString(5, hp);
+            PS.setString(4, hp);
+            PS.setString(5, alamat);
             PS.executeUpdate();
             tampil_tabel();
             kosong();
@@ -336,13 +336,13 @@ public class Pelanggan extends javax.swing.JInternalFrame {
         String hp = Thp.getText();
 
         Connection db = Database.KoneksiDB();
-        String Query = "UPDATE pelanggan SET nama_pelanggan=?, jenis_kelamin=?, NoHp=?, alamat=? WHERE id_pelanggan=?";
+        String Query = "UPDATE pelanggan SET nama_pelanggan=?, jenis_kelamin=?, alamat=?, NoHp=? WHERE id_pelanggan=?";
         try {
             PreparedStatement PS = db.prepareStatement(Query);
             PS.setString(1, nama);
             PS.setString(2, jk); 
-            PS.setString(3, hp);
-            PS.setString(4, alamat);
+            PS.setString(3, alamat);
+            PS.setString(4, hp);
             PS.setString(5, id);
             PS.executeUpdate();
             tampil_tabel();
