@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-    
+
     public Login() {
         initComponents();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -136,9 +136,9 @@ public class Login extends javax.swing.JFrame {
 
     private void TpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TpasswordActionPerformed
     }//GEN-LAST:event_TpasswordActionPerformed
-    
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
