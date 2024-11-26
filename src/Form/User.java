@@ -272,7 +272,7 @@ public class User extends javax.swing.JInternalFrame {
 
     private void BhapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BhapusMouseClicked
         try {
-            String sql = "DELETE FROM user WHERE id=?";
+            String sql = "DELETE FROM user WHERE id_user=?";
             Connection conn = Database.KoneksiDB();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, Tid.getText());
@@ -288,7 +288,7 @@ public class User extends javax.swing.JInternalFrame {
 
     private void BeditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BeditMouseClicked
         try {
-            String sql = "UPDATE user SET username=?, password=?, role=? WHERE id=?";
+            String sql = "UPDATE user SET username=?, password=?, role=? WHERE id_user=?";
             Connection conn = Database.KoneksiDB();
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, Tusername.getText());
