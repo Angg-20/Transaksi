@@ -261,7 +261,7 @@ public class EntriMeja extends javax.swing.JInternalFrame {
 
     private void BhapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BhapusMouseClicked
         Connection con = Database.KoneksiDB();
-        String query = "DELETE FROM menu WHERE id_meja = ?";
+        String query = "DELETE FROM meja WHERE id_meja = ?";
         try {
             PreparedStatement pst = con.prepareStatement(query);
             int selectedRow = Table.getSelectedRow();
