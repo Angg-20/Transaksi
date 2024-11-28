@@ -47,7 +47,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         Btransaksi = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
-        BMeja = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         Buser = new javax.swing.JButton();
 
@@ -299,10 +299,10 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel11.setBackground(new java.awt.Color(153, 153, 153));
 
-        BMeja.setText("Meja");
-        BMeja.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton2.setText("Meja");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BMejaMouseClicked(evt);
+                jButton2MouseClicked(evt);
             }
         });
 
@@ -310,16 +310,16 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+            .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BMeja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BMeja, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -499,21 +499,6 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtransaksiMouseClicked
 
-    private void BMejaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BMejaMouseClicked
-        TutupPanel();
-        if (EntriMeja == null) {
-            EntriMeja = new EntriMeja();
-            panel.add(EntriMeja);
-        }
-
-        EntriMeja.setVisible(true);
-        try {
-            EntriMeja.setMaximum(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Salah");
-        }
-    }//GEN-LAST:event_BMejaMouseClicked
-
     private void BuserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuserMouseClicked
         TutupPanel();
         if (User == null) {
@@ -538,6 +523,21 @@ public class Dashboard extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_jButton4MouseClicked
 
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        TutupPanel();
+        if (EntriMeja == null) {
+            EntriMeja = new EntriMeja();
+            panel.add(EntriMeja);
+        }
+
+        EntriMeja.setVisible(true);
+        try {
+            EntriMeja.setMaximum(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Salah");
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -547,7 +547,6 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BMeja;
     private javax.swing.JButton BMenu;
     private javax.swing.JButton BOrder;
     private javax.swing.JButton Blaporan;
@@ -555,6 +554,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton Btransaksi;
     private javax.swing.JButton Buser;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

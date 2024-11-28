@@ -34,6 +34,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
         AmbilDataPelanggan();
         AmbilDataMenu();
         AmbilDataOrder();
+        AmbilDataMeja();
         TampilkanData();
         kosong();
     }
@@ -87,20 +88,49 @@ public class EntriOrder extends javax.swing.JInternalFrame {
         }
     }
 
+    private void AmbilDataUser() {
+        try (Connection DB = Database.KoneksiDB()) {
+            PreparedStatement Query = DB.prepareStatement("SELECT * FROM menu");
+            ResultSet Hasil = Query.executeQuery();
+            Lmenu.clear();
+            while (Hasil.next()) {
+                Lmenu.add(new Mmenu(
+                        Hasil.getInt("id_menu"),
+                        Hasil.getInt("harga"),
+                        Hasil.getString("nama_menu")
+                ));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     private void AmbilDataOrder() {
         try (Connection DB = Database.KoneksiDB()) {
-            PreparedStatement Query = DB.prepareStatement("SELECT * FROM pesanan");
+            PreparedStatement Query = DB.prepareStatement("SELECT * FROM user");
             ResultSet Hasil = Query.executeQuery();
-            Lorder.clear();
+            Luser.clear();
             while (Hasil.next()) {
-                Lorder.add(new Morder(
-                        Hasil.getInt("id_pesanan"),
-                        Hasil.getInt("id_pelanggan"),
-                        Hasil.getInt("id_menu"),
-                        Hasil.getInt("jumlah"),
-                        Hasil.getInt("total"),
-                        Hasil.getString("tanggal")
+                Luser.add(new MUser(
+                        Hasil.getInt("id_user"),
+                        Hasil.getString("username"),
+                        Hasil.getString("password"),
+                        Hasil.getString("role")
                 ));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    private void AmbilDataMeja() {
+        try {
+            Connection db = Database.KoneksiDB();
+            PreparedStatement ps = db.prepareStatement("Select * from meja");
+            ResultSet hasil = ps.executeQuery();
+            Lmeja.clear();
+            while (hasil.next()) {
+                Lmeja.add(new Mmeja(hasil.getInt("id_meja"), hasil.getInt("no_meja"), hasil.getInt("kapasitas")));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -231,7 +261,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
             }
         });
 
-        Bhapus.setText("Hapus");
+        Bhapus.setText("Batal");
         Bhapus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BhapusMouseClicked(evt);
@@ -474,7 +504,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
 
     private void BsimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BsimpanMouseClicked
         try (Connection DB = Database.KoneksiDB()) {
-            String Query = "INSERT INTO pesanan (id_pesanan, id_pelanggan, id_user, id_meja) VALUES (?, ?, ?, ?, ?, ?)";
+            String Query = "INSERT INTO pesanan (id_pesanan, id_pelanggan, id_user, id_meja) VALUES (?, ?, ?, ?)";
             PreparedStatement Saya = DB.prepareStatement(Query);
             Saya.setString(1, Tid.getText());
             Saya.setString(2, Tpelanggan1.getText());
@@ -482,11 +512,6 @@ public class EntriOrder extends javax.swing.JInternalFrame {
             Saya.setString(4, Tmeja.getText());
 
             DefaultTableModel model = (DefaultTableModel) Table.getModel();
-            double total = 0;
-            for (int i = 0; i < model.getRowCount(); i++) {
-                total += Double.parseDouble(model.getValueAt(i, 4).toString());
-            }
-            Saya.setDouble(5, total);
             Saya.executeUpdate();
 
             for (int i = 0; i < model.getRowCount(); i++) {

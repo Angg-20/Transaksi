@@ -27,6 +27,7 @@ public class EntriMeja extends javax.swing.JInternalFrame {
     public void kosong() {
         Tid.setText("");
         Tmeja.setText("");
+        Tkapasitas.setText("");
     }
 
     public void AmbilData() {
@@ -47,7 +48,7 @@ public class EntriMeja extends javax.swing.JInternalFrame {
         DefaultTableModel TB = (DefaultTableModel) Table.getModel();
         TB.setRowCount(0);
         for (Mmeja M : Lmeja) {
-            Object[] isi = new Object[2];
+            Object[] isi = new Object[3];
             isi[0] = M.getId_meja();
             isi[1] = M.getNo_meja();
             isi[2] = M.getKapasitas();
@@ -72,6 +73,8 @@ public class EntriMeja extends javax.swing.JInternalFrame {
         Bbatal = new javax.swing.JButton();
         Bhapus = new javax.swing.JButton();
         Bedit = new javax.swing.JButton();
+        Tkapasitas = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -96,11 +99,11 @@ public class EntriMeja extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Kode Menu", "Nama Menu"
+                "Kode meja", "No Meja", "Kapasitas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -153,6 +156,9 @@ public class EntriMeja extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Kapasitas");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,10 +174,12 @@ public class EntriMeja extends javax.swing.JInternalFrame {
                         .addComponent(Bsimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Bbatal, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Tkapasitas)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -186,7 +194,11 @@ public class EntriMeja extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Tmeja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Tkapasitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Bbatal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Bsimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -233,6 +245,7 @@ public class EntriMeja extends javax.swing.JInternalFrame {
             if (m.getId_meja() == Integer.parseInt(NS)) {
                 Tid.setText(String.valueOf(m.getId_meja()));
                 Tmeja.setText(String.valueOf(m.getNo_meja()));
+                Tkapasitas.setText(String.valueOf(m.getKapasitas()));
             }
         }
     }//GEN-LAST:event_TableMouseClicked
@@ -240,13 +253,15 @@ public class EntriMeja extends javax.swing.JInternalFrame {
     private void BsimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BsimpanMouseClicked
         String Kmeja = Tid.getText();
         String Nmeja = Tmeja.getText();
+        String k = Tkapasitas.getText();
 
         Connection db = Database.KoneksiDB();
-        String Query = "INSERT INTO meja(id_meja, no_meja)values (?, ?)";
+        String Query = "INSERT INTO meja(id_meja, no_meja, kapasitas)values (?, ?, ?)";
         try {
             PreparedStatement ps = db.prepareStatement(Query);
             ps.setString(1, Kmeja);
             ps.setString(2, Nmeja);
+            ps.setString(3, k);
             ps.execute();
             AmbilData();
             TampilkanData();
@@ -286,13 +301,15 @@ public class EntriMeja extends javax.swing.JInternalFrame {
     private void BeditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BeditMouseClicked
         String Kmeja = Tid.getText();
         String Nmeja = Tmeja.getText();
+        String k = Tkapasitas.getText();
 
         Connection db = Database.KoneksiDB();
-        String Query = "Update meja set no_meja = ? where id_meja = ?";
+        String Query = "Update meja set no_meja = ?, kapasitas = ? where id_meja = ?";
         try {
             PreparedStatement ps = db.prepareStatement(Query);
             ps.setString(1, Nmeja);
-            ps.setString(2, Kmeja);
+            ps.setString(2, k);
+            ps.setString(3, Kmeja);
             ps.executeUpdate();
             AmbilData();
             TampilkanData();
@@ -315,9 +332,11 @@ public class EntriMeja extends javax.swing.JInternalFrame {
     private javax.swing.JButton Bsimpan;
     private javax.swing.JTable Table;
     private javax.swing.JTextField Tid;
+    private javax.swing.JTextField Tkapasitas;
     private javax.swing.JTextField Tmeja;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
