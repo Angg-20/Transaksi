@@ -36,7 +36,7 @@ public class EntriMeja extends javax.swing.JInternalFrame {
             ResultSet hasil = ps.executeQuery();
             Lmeja.clear();
             while (hasil.next()) {
-                Lmeja.add(new Mmeja(hasil.getInt("id_meja"), hasil.getInt("no_meja")));
+                Lmeja.add(new Mmeja(hasil.getInt("id_meja"), hasil.getInt("no_meja"),hasil.getInt("kapasitas")));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -50,6 +50,7 @@ public class EntriMeja extends javax.swing.JInternalFrame {
             Object[] isi = new Object[2];
             isi[0] = M.getId_meja();
             isi[1] = M.getNo_meja();
+            isi[2] = M.getKapasitas();
             TB.addRow(isi);
         }
         Table.setModel(TB);

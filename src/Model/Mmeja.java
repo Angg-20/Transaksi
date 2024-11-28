@@ -2,16 +2,17 @@ package Model;
 
 public class Mmeja {
 
-    int id_meja, no_meja;
+    int id_meja, no_meja, kapasitas;
     
     public void Mmeja(){
         
     }
 
-    public Mmeja(int id_meja, int no_meja) {
+    public Mmeja(int id_meja, int no_meja, int kapasitas) {
         this.id_meja = id_meja;
         this.no_meja = no_meja;
-    }
+        this.kapasitas = kapasitas;
+    }    
 
     public int getId_meja() {
         return id_meja;
@@ -28,7 +29,15 @@ public class Mmeja {
     public void setNo_meja(int no_meja) {
         this.no_meja = no_meja;
     }
-    
+
+    public int getKapasitas() {
+        return kapasitas;
+    }
+
+    public void setKapasitas(int kapasitas) {
+        this.kapasitas = kapasitas;
+    }
+        
     
     
 }

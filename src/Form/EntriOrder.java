@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Form;
 
 import Koneksi.Database;
+import Model.MUser;
+import Model.Mmeja;
 import Model.Mpelanggan;
 import Model.Mmenu;
 import Model.Morder;
@@ -29,7 +26,9 @@ public class EntriOrder extends javax.swing.JInternalFrame {
     List<Mpelanggan> Lpelanggan = new ArrayList<>();
     List<Mmenu> Lmenu = new ArrayList<>();
     List<Morder> Lorder = new ArrayList<>();
-    
+    List<Mmeja> Lmeja = new ArrayList<>();
+    List<MUser> Luser = new ArrayList<>();
+
     public EntriOrder() {
         initComponents();
         AmbilDataPelanggan();
@@ -38,20 +37,20 @@ public class EntriOrder extends javax.swing.JInternalFrame {
         TampilkanData();
         kosong();
     }
-    
+
     private void kosong() {
         Tid.setText("");
-        Tpelanggan.setText("");
-        Tnamapelanggan.setText("");
+        Tpetugas.setText("");
+        Tnamapetugas.setText("");
         Tmenu.setText("");
         TNmenu.setText("");
         Tjumlah.setText("");
         Tharga.setText("");
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         tanggal.setText(sdf.format(new Date()));
     }
-    
+
     private void AmbilDataPelanggan() {
         try (Connection DB = Database.KoneksiDB()) {
             PreparedStatement Query = DB.prepareStatement("SELECT * FROM pelanggan");
@@ -70,7 +69,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     private void AmbilDataMenu() {
         try (Connection DB = Database.KoneksiDB()) {
             PreparedStatement Query = DB.prepareStatement("SELECT * FROM menu");
@@ -87,7 +86,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     private void AmbilDataOrder() {
         try (Connection DB = Database.KoneksiDB()) {
             PreparedStatement Query = DB.prepareStatement("SELECT * FROM pesanan");
@@ -107,7 +106,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     private void TampilkanData() {
         DefaultTableModel TB = (DefaultTableModel) Table.getModel();
         TB.setRowCount(0);
@@ -131,11 +130,10 @@ public class EntriOrder extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Tharga = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         TNmenu = new javax.swing.JTextField();
-        Tnamapelanggan = new javax.swing.JTextField();
+        Tnamapetugas = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         Tjumlah = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -147,26 +145,28 @@ public class EntriOrder extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         Tid = new javax.swing.JTextField();
-        Tpelanggan = new javax.swing.JTextField();
+        Tpetugas = new javax.swing.JTextField();
         Bsimpan = new javax.swing.JButton();
         Btambah = new javax.swing.JButton();
         Bhapus = new javax.swing.JButton();
         Tmenu = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        Tnamapelanggan1 = new javax.swing.JTextField();
+        Tpelanggan1 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        Tmeja = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        Tharga = new javax.swing.JTextField();
+        Tkapasitas = new javax.swing.JTextField();
 
-        Tharga.setEditable(false);
-        Tharga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ThargaActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Kode Pelanggan");
+        jLabel7.setText("Kode Petugas");
 
         jLabel10.setText("Harga");
 
         TNmenu.setEditable(false);
 
-        Tnamapelanggan.setEditable(false);
+        Tnamapetugas.setEditable(false);
 
         jLabel11.setText("Nama Menu");
 
@@ -201,7 +201,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Tanggal");
 
-        jLabel8.setText("Nama pelanggan");
+        jLabel8.setText("Nama Petugas");
 
         jLabel9.setText("Kode Menu");
 
@@ -211,9 +211,9 @@ public class EntriOrder extends javax.swing.JInternalFrame {
             }
         });
 
-        Tpelanggan.addActionListener(new java.awt.event.ActionListener() {
+        Tpetugas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TpelangganActionPerformed(evt);
+                TpetugasActionPerformed(evt);
             }
         });
 
@@ -244,6 +244,32 @@ public class EntriOrder extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel13.setText("Kode Pelanggan");
+
+        jLabel14.setText("Nama pelanggan");
+
+        Tnamapelanggan1.setEditable(false);
+
+        Tpelanggan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Tpelanggan1ActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("No Meja");
+
+        Tmeja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TmejaActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setText("Kapasitas");
+
+        Tharga.setEditable(false);
+
+        Tkapasitas.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -260,6 +286,20 @@ public class EntriOrder extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(Tmeja, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(Tkapasitas, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(Tpelanggan1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Tnamapelanggan1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +314,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel11)
                                             .addComponent(TNmenu, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(Tid, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Tpelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Tpetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
@@ -282,16 +322,21 @@ public class EntriOrder extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel6)
                                             .addComponent(tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel8)
-                                            .addComponent(Tnamapelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(Tnamapetugas, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel14)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel12)
                                             .addComponent(Tjumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(28, 28, 28)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(Tharga, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(28, 28, 28)
+                                                .addComponent(jLabel10)
+                                                .addGap(171, 171, 171))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Tharga, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                         .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
@@ -312,12 +357,32 @@ public class EntriOrder extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Tpelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Tpetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Tnamapelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Tnamapetugas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Tpelanggan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Tnamapelanggan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Tmeja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Tkapasitas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
@@ -346,32 +411,26 @@ public class EntriOrder extends javax.swing.JInternalFrame {
                     .addComponent(Bsimpan)
                     .addComponent(Btambah)
                     .addComponent(Bhapus))
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ThargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThargaActionPerformed
-    }//GEN-LAST:event_ThargaActionPerformed
-
-    private void TidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TidActionPerformed
-    }//GEN-LAST:event_TidActionPerformed
-
-    private void TpelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TpelangganActionPerformed
-        String id_pelanggan = Tpelanggan.getText();
-        for(Mpelanggan pelanggan : Lpelanggan) {
-            if(String.valueOf(pelanggan.getId_pelanggan()).equals(id_pelanggan)) {
-                Tnamapelanggan.setText(pelanggan.getNama_pelanggan());
+    private void TpetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TpetugasActionPerformed
+        String id_petugas = Tpetugas.getText();
+        for (MUser petugas : Luser) {
+            if (String.valueOf(petugas.getId_user()).equals(id_petugas)) {
+                Tnamapetugas.setText(petugas.getUsername());
                 break;
             }
         }
-    }//GEN-LAST:event_TpelangganActionPerformed
+    }//GEN-LAST:event_TpetugasActionPerformed
 
     private void TmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TmenuActionPerformed
         String id_menu = Tmenu.getText();
-        for(Mmenu menu : Lmenu) {
-            if(String.valueOf(menu.getId_menu()).equals(id_menu)) {
+        for (Mmenu menu : Lmenu) {
+            if (String.valueOf(menu.getId_menu()).equals(id_menu)) {
                 TNmenu.setText(menu.getNama_menu());
                 Tharga.setText(String.valueOf(menu.getHarga()));
                 break;
@@ -381,7 +440,7 @@ public class EntriOrder extends javax.swing.JInternalFrame {
 
     private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
         int row = Table.getSelectedRow();
-        if(row >= 0) {
+        if (row >= 0) {
             Tmenu.setText(Table.getValueAt(row, 0).toString());
             TNmenu.setText(Table.getValueAt(row, 1).toString());
             Tjumlah.setText(Table.getValueAt(row, 2).toString());
@@ -390,41 +449,86 @@ public class EntriOrder extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TableMouseClicked
 
     private void BtambahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtambahMouseClicked
-        kosong();
+        String id_menu = Tmenu.getText();
+        String nama_menu = TNmenu.getText();
+        int jumlah = Integer.parseInt(Tjumlah.getText());
+        int harga = Integer.parseInt(Tharga.getText());
+        int subTotal = jumlah * harga;
+
+        DefaultTableModel model = (DefaultTableModel) Table.getModel();
+        model.addRow(new Object[]{id_menu, nama_menu, jumlah, harga, subTotal});
+
+        Tmenu.setText("");
+        TNmenu.setText("");
+        Tjumlah.setText("");
+        Tharga.setText("");
     }//GEN-LAST:event_BtambahMouseClicked
 
     private void BhapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BhapusMouseClicked
         int row = Table.getSelectedRow();
-        if(row >= 0) {
+        if (row >= 0) {
             DefaultTableModel model = (DefaultTableModel) Table.getModel();
             model.removeRow(row);
         }
     }//GEN-LAST:event_BhapusMouseClicked
 
     private void BsimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BsimpanMouseClicked
-        try {
-            Connection DB = Database.KoneksiDB();
-            String sql = "INSERT INTO pesanan (id_pelanggan, id_menu, jumlah, total, tanggal) VALUES (?,?,?,?,?)";
-            PreparedStatement ps = DB.prepareStatement(sql);
-            
-            ps.setInt(1, Integer.parseInt(Tpelanggan.getText()));
-            ps.setInt(2, Integer.parseInt(Tmenu.getText()));
-            ps.setInt(3, Integer.parseInt(Tjumlah.getText()));
-            ps.setInt(4, Integer.parseInt(Tjumlah.getText()) * Integer.parseInt(Tharga.getText()));
-            ps.setString(5, tanggal.getText());
-            
-            ps.executeUpdate();
+        try (Connection DB = Database.KoneksiDB()) {
+            String Query = "INSERT INTO pesanan (id_pesanan, id_pelanggan, id_user, id_meja) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement Saya = DB.prepareStatement(Query);
+            Saya.setString(1, Tid.getText());
+            Saya.setString(2, Tpelanggan1.getText());
+            Saya.setString(3, Tpetugas.getText());
+            Saya.setString(4, Tmeja.getText());
+
+            DefaultTableModel model = (DefaultTableModel) Table.getModel();
+            double total = 0;
+            for (int i = 0; i < model.getRowCount(); i++) {
+                total += Double.parseDouble(model.getValueAt(i, 4).toString());
+            }
+            Saya.setDouble(5, total);
+            Saya.executeUpdate();
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String QueryDetail = "INSERT INTO detail_pesanan (id_pesanan, id_menu, jumlah) VALUES (?, ?, ?)";
+                PreparedStatement SayaDetail = DB.prepareStatement(QueryDetail);
+                SayaDetail.setString(1, Tid.getText());
+                SayaDetail.setString(2, model.getValueAt(i, 0).toString());
+                SayaDetail.setInt(3, Integer.parseInt(model.getValueAt(i, 2).toString()));
+                SayaDetail.executeUpdate();
+            }
+
             JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
-            
-            AmbilDataOrder();
-            TampilkanData();
             kosong();
-            
+            model.setRowCount(0);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan: " + e.getMessage());
         }
     }//GEN-LAST:event_BsimpanMouseClicked
 
+    private void Tpelanggan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tpelanggan1ActionPerformed
+        String id_pelanggan = Tpelanggan1.getText();
+        for (Mpelanggan pelanggan : Lpelanggan) {
+            if (String.valueOf(pelanggan.getId_pelanggan()).equals(id_pelanggan)) {
+                Tnamapelanggan1.setText(pelanggan.getNama_pelanggan());
+                break;
+            }
+        }
+    }//GEN-LAST:event_Tpelanggan1ActionPerformed
+
+    private void TmejaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TmejaActionPerformed
+        String id_meja = Tmeja.getText();
+        for (Mmeja meja : Lmeja) {
+            if (String.valueOf(meja.getId_meja()).equals(id_meja)) {
+                Tkapasitas.setText(String.valueOf(meja.getKapasitas()));
+                break;
+            }
+        }
+    }//GEN-LAST:event_TmejaActionPerformed
+
+    private void TidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TidActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bhapus;
@@ -435,12 +539,20 @@ public class EntriOrder extends javax.swing.JInternalFrame {
     private javax.swing.JTextField Tharga;
     private javax.swing.JTextField Tid;
     private javax.swing.JTextField Tjumlah;
+    private javax.swing.JTextField Tkapasitas;
+    private javax.swing.JTextField Tmeja;
     private javax.swing.JTextField Tmenu;
-    private javax.swing.JTextField Tnamapelanggan;
-    private javax.swing.JTextField Tpelanggan;
+    private javax.swing.JTextField Tnamapelanggan1;
+    private javax.swing.JTextField Tnamapetugas;
+    private javax.swing.JTextField Tpelanggan1;
+    private javax.swing.JTextField Tpetugas;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
